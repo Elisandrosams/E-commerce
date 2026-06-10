@@ -368,6 +368,16 @@ select {
     width: 100%;
     max-width: 200px;
 }
+.books__loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 60px;
+    color:#7342d6
+}
+.books__loading .fa-spinner {
+    font-size: 60px;
+}
 
 /*small screen formatting*/
 
