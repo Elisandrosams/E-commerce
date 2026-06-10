@@ -5,10 +5,10 @@ function renderBooks(filter) {
     const books = getBooks();
 
 if (filter === 'LOW_TO_HIGH') {
-    books.sort((a, b) => a.originalPrice - b.originalPrice);
+    books.sort((a, b) => (a.salePrice || a.originalPrice) - (b.salePrice || b.originalPrice));
     }
 else if (filter === 'HIGH_TO_LOW') {
-    books.sort((a, b) => b.originalPrice - a.originalPrice);
+    books.sort((a, b) => (b.salePrice || b.originalPrice) - (a.salePrice || a.originalPrice));
 }
 else if (filter === 'RATING') {
     books.sort((a, b) => b.rating - a.rating);
@@ -28,12 +28,19 @@ else if (filter === 'RATING') {
         ${ratingHTML(book.rating)}
         </div>
         <div class="book__price">
-        <span>$${book.originalPrice}</span>
+            ${priceHTML(book.originalPrice, book.salePrice)}
         </div>
     </div>`
     }).join('')
     booksWrapper.innerHTML = booksHtml;
 }  
+
+function priceHTML(originalPrice, salePrice) {
+    if (!salePrice) {
+        return `$${originalPrice}`
+    }
+    return `<span class="book__price--normal">$${originalPrice}</span> $${salePrice}`
+}
 
 function filterBooks(event) {
     renderBooks(event.target.value);
@@ -61,7 +68,7 @@ function getBooks() {
       title: "Crack the Coding Interview",
       url: "assets/crack the coding interview.png",
       originalPrice: 39.99,
-      salePrice: 4.99,
+      salePrice: 24.99,
       rating: 4.5,
     },
     {
@@ -77,7 +84,7 @@ function getBooks() {
       title: "Deep Work",
       url: "assets/deep work.jpeg",
       originalPrice: 19.99,
-      salePrice: 4.99,
+      salePrice: 14.99,
       rating: 5,
     },
     {
@@ -93,7 +100,7 @@ function getBooks() {
       title: "Be Obsessed Or Be Average",
       url: "assets/book-2.jpeg",
       originalPrice: 19.99,
-      salePrice: 4.99,
+      salePrice: 14.99,
       rating: 4,
     },
     {
@@ -101,7 +108,7 @@ function getBooks() {
       title: "Rich Dad Poor Dad",
       url: "assets/book-3.jpeg",
       originalPrice: 29.99,
-      salePrice: 4.99,
+      salePrice: 19.99,
       rating: 5,
     },
     {
@@ -109,7 +116,7 @@ function getBooks() {
       title: "Cashflow Quadrant",
       url: "assets/book-4.jpeg",
       originalPrice: 29.99,
-      salePrice: 4.99,
+      salePrice: 19.99,
       rating: 4,
     },
     {
@@ -117,7 +124,7 @@ function getBooks() {
       title: "48 Laws of Power",
       url: "assets/book-5.jpeg",
       originalPrice: 19.99,
-      salePrice: 4.99,
+      salePrice: 14.99,
       rating: 4.5,
     },
     {
