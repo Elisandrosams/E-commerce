@@ -156,6 +156,14 @@ function getBooks() {
       salePrice: null,
       rating: 4.5,
     },
+    {
+        id: 12,
+        title: "Can't Hurt Me",
+        url: "assets/david goggins.jpeg",
+        originalPrice: 9.99,
+        salePrice: 4.99,
+        rating: 4.5,
+    },
     ]);
     }, 1000);
     });
